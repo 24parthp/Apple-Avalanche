@@ -18,19 +18,28 @@ appleXpos = apple.xcor()
 #-----functions-----
 # given a turtle, set that turtle to be shaped by the image file
 def draw_apple(active_apple):
-  trtl.goto(appleXpos, appleYpos)
+  global wn
+
+  active_apple.goto(appleXpos, appleYpos)
   active_apple.shape(apple_image)
+  keyToPress()
   wn.update()
 
 def keyToPress():
-  global wn
-
   apple.write('A')
-  wn.onkey(apple.clear(), 'a')
+
+def drop_apple():
+  global apple
+
+  apple.seth(270)
+  print(apple.ycor())
+  apple.forward(100)
+  print(apple.ycor())
 
 #-----function calls-----
 draw_apple(apple)
-keyToPress()
+
+wn.onkeypress(drop_apple, "a")
 
 wn.listen()
 wn.mainloop()
